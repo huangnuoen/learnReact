@@ -11,10 +11,12 @@ class Todolist extends Component {
     };
     this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleItemClick=this.handleItemClick.bind(this)
+    this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   render() {
+    console.log("render");
+
     return (
       <Fragment>
         <div>
@@ -46,6 +48,28 @@ class Todolist extends Component {
     );
   }
 
+  componentWillMount() {
+    console.log("componentWillMount");
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount");
+  }
+  // 组件被更新前执行
+  shouldComponentUpdate() {
+    console.log("shouldComponentUpdate");
+    return true;
+  }
+  // 组件更新前，shouldComponentUpdate后执行
+  componentWillUpdate() {
+    console.log("componentWillUpdate");
+  }
+  componentDidUpdate() {
+    console.log("componentDidUpdate");
+  }
+  componentWillReceiveProps() {
+    console.log("componentWillReceiveProps");
+  }
   handleItemClick(i) {
     // 最好不好直接修改state,不好做性能优化
     const list = [...this.state.list];

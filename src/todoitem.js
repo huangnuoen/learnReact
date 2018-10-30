@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import PropTypes from 'prop-types'
+import propTypes from "prop-types";
 
 class TodoItem extends Component {
   constructor(props) {
@@ -7,21 +7,31 @@ class TodoItem extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   render() {
-    const {content}  = this.props;
-    
+    console.log("child render");
+
+    const { content } = this.props;
+
     return <li onClick={this.handleClick}>{content}</li>;
+  }
+  // 从父组件接收了参数
+  // 且父组件的render重新执行了就会执行
+  componentWillReceiveProps() {
+    console.log("componentWillReceiveProps");
+  }
+  componentWillUnmount() {
+    console.log("child componentWillUnmount");
   }
   // 子调父方法
   handleClick() {
     this.props.handleItemDetele(this.props.index);
   }
 }
-TodoItem.PropTypes = {
-  content: PropTypes.string.isRequired,
-  handleItemDetele: PropTypes.func,
-  content: PropTypes.number
+TodoItem.propTypes = {
+  content: propTypes.string.isRequired,
+  handleItemDetele: propTypes.func
+  // content: propTypes.string
 };
 TodoItem.defaultProps = {
-  content: 'hello'
-}
+  content: "hello"
+};
 export default TodoItem;
