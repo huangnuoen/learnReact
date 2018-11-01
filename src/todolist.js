@@ -2,6 +2,7 @@
 import React, { Component, Fragment } from "react";
 import TodoItem from "./todoitem";
 import "./style.css";
+import axios from "axios";
 class Todolist extends Component {
   constructor(props) {
     super();
@@ -15,7 +16,7 @@ class Todolist extends Component {
   }
 
   render() {
-    console.log("render");
+    // console.log("render");
 
     return (
       <Fragment>
@@ -49,26 +50,39 @@ class Todolist extends Component {
   }
 
   componentWillMount() {
-    console.log("componentWillMount");
+    // console.log("componentWillMount");
   }
 
   componentDidMount() {
-    console.log("componentDidMount");
+    // console.log("componentDidMount");
+    // ajax请求
+    axios.get("/api/todolist").then(res => {
+      let arr = [];
+      for (let i = 0; i < 10; i++) {
+        const element = res.data.data[i].address;
+        arr.push(element);
+      }
+      this.setState(() => {
+        return {
+          list: arr
+        };
+      });
+    });
   }
   // 组件被更新前执行
   shouldComponentUpdate() {
-    console.log("shouldComponentUpdate");
+    // console.log("shouldComponentUpdate");
     return true;
   }
   // 组件更新前，shouldComponentUpdate后执行
   componentWillUpdate() {
-    console.log("componentWillUpdate");
+    // console.log("componentWillUpdate");
   }
   componentDidUpdate() {
-    console.log("componentDidUpdate");
+    // console.log("componentDidUpdate");
   }
   componentWillReceiveProps() {
-    console.log("componentWillReceiveProps");
+    // console.log("componentWillReceiveProps");
   }
   handleItemClick(i) {
     // 最好不好直接修改state,不好做性能优化

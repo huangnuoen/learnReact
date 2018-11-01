@@ -1,11 +1,28 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component, Fragment } from "react";
+import './style.css';
 
 class App extends Component {
-  render() {
-    return ( < div className = "App" > hello world < /div>);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: true
+    };
+    this.handleToggle = this.handleToggle.bind(this);
   }
+  render() {
+    return (
+      <Fragment>
+        <div className={this.state.show?'show':'hide'}> hello world </div>
+        <button onClick={this.handleToggle}>toggle</button>
 
-  export default App;
+      </Fragment>
+    );
+  }
+  handleToggle() {
+    this.setState({
+      show: !this.state.show
+    });
+  }
+}
+
+export default App;
