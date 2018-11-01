@@ -1,0 +1,46 @@
+{
+  "sublimeTextKeymap.promptV3Features": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.snippetSuggestions": "top",
+  "editor.formatOnPaste": true,
+  "workbench.colorTheme": "One Dark Pro Vivid",
+  "window.zoomLevel": 1,
+  "editor.tabSize": 2,
+  "explorer.confirmDelete": false,
+  "editor.wordWrap": "on",
+  "beautify.language": {
+    "js": {
+      "type": [
+        "javascript",
+        "json",
+        "jsonc"
+      ],
+      "filename": [
+        ".jshintrc",
+        ".jsbeautifyrc"
+      ]
+    },
+    "css": [
+      "css",
+      "scss",
+      "less"
+    ],
+    "html": [
+      "htm",
+      "html"
+    ]
+  },
+  "emmet.includeLanguages": {
+    "wxml": "html",
+    "javascript": "javascriptreact"
+  },
+  "minapp-vscode.disableAutoConfig": true,
+  "emmet.triggerExpansionOnTab": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1200,
+  "files.associations": {
+    "*.jsx": "javascriptreact",
+    "*.js": "javascript"
+  },
+  "[javascriptreact]": {}
+}
