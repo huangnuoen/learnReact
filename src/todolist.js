@@ -1,107 +1,39 @@
 // Fragment 占位
 import React, { Component, Fragment } from "react";
-import TodoItem from "./todoitem";
-import "./style.css";
-import axios from "axios";
+import "antd/dist/antd.css";
+import { Input, Button, List } from "antd";
+// import TodoItem from "./todoitem";
+// import "./style.css";
+// import axios from "axios";
+const data = [
+  "Racing car sprays burning fuel into crowd.",
+  "Japanese princess to wed commoner.",
+  "Australian walks 100km after outback crash.",
+  "Man charged over missing wedding girl.",
+  "Los Angeles battles huge wildfires."
+];
 class Todolist extends Component {
   constructor(props) {
     super();
-    this.state = {
-      inputValue: "",
-      list: []
-    };
-    this.handleBtnClick = this.handleBtnClick.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   render() {
-    // console.log("render");
-
     return (
-      <Fragment>
+      <div style={{ margin: "10px" }}>
         <div>
-          <label htmlFor="insertArea">输入</label>
-          <input
-            id="insertArea"
-            className="input"
-            type="text"
-            value={this.state.inputValue}
-            onChange={this.handleInputChange}
+          <Input
+            placeholder="todo sth"
+            style={{ width: "300px", marginRight: "10px" }}
           />
-          <button onClick={this.handleBtnClick}>提交</button>
+          <Button type="primary">提交</Button>
         </div>
-        <ul>
-          {this.state.list.map((item, index) => {
-            return (
-              <div>
-                <TodoItem
-                  content={item}
-                  index={index}
-                  // 传给子方法
-                  handleItemDetele={this.handleItemClick}
-                />
-              </div>
-            );
-          })}
-        </ul>
-      </Fragment>
+        <List
+          bordered
+          dataSource={data}
+          renderItem={item => <List.Item>{item}</List.Item>}
+        />
+      </div>
     );
-  }
-
-  componentWillMount() {
-    // console.log("componentWillMount");
-  }
-
-  componentDidMount() {
-    // console.log("componentDidMount");
-    // ajax请求
-    axios.get("/api/todolist").then(res => {
-      let arr = [];
-      for (let i = 0; i < 10; i++) {
-        const element = res.data.data[i].address;
-        arr.push(element);
-      }
-      this.setState(() => {
-        return {
-          list: arr
-        };
-      });
-    });
-  }
-  // 组件被更新前执行
-  shouldComponentUpdate() {
-    // console.log("shouldComponentUpdate");
-    return true;
-  }
-  // 组件更新前，shouldComponentUpdate后执行
-  componentWillUpdate() {
-    // console.log("componentWillUpdate");
-  }
-  componentDidUpdate() {
-    // console.log("componentDidUpdate");
-  }
-  componentWillReceiveProps() {
-    // console.log("componentWillReceiveProps");
-  }
-  handleItemClick(i) {
-    // 最好不好直接修改state,不好做性能优化
-    const list = [...this.state.list];
-    list.splice(i, 1);
-    this.setState({
-      list
-    });
-  }
-
-  handleInputChange(e) {
-    this.setState({ inputValue: e.target.value });
-  }
-
-  handleBtnClick(e) {
-    this.setState({
-      list: [...this.state.list, this.state.inputValue],
-      inputValue: ""
-    });
   }
 }
 export default Todolist;
