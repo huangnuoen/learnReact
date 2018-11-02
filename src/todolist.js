@@ -2,26 +2,23 @@
 import React, { Component, Fragment } from "react";
 import "antd/dist/antd.css";
 import { Input, Button, List } from "antd";
+import store from "./store";
 // import TodoItem from "./todoitem";
 // import "./style.css";
 // import axios from "axios";
-const data = [
-  "Racing car sprays burning fuel into crowd.",
-  "Japanese princess to wed commoner.",
-  "Australian walks 100km after outback crash.",
-  "Man charged over missing wedding girl.",
-  "Los Angeles battles huge wildfires."
-];
+
 class Todolist extends Component {
   constructor(props) {
-    super();
+    super(props);
+    console.log(store.getState());
+    this.state = store.getState();
   }
 
   render() {
     return (
       <div style={{ margin: "10px" }}>
         <div>
-          <Input
+          <Input value={this.state.inputValue}
             placeholder="todo sth"
             style={{ width: "300px", marginRight: "10px" }}
           />
@@ -29,7 +26,7 @@ class Todolist extends Component {
         </div>
         <List
           bordered
-          dataSource={data}
+          dataSource={this.state.list}
           renderItem={item => <List.Item>{item}</List.Item>}
         />
       </div>
