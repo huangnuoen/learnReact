@@ -10,7 +10,6 @@ import store from "./store";
 class Todolist extends Component {
   constructor(props) {
     super(props);
-    console.log(store.getState());
     this.state = store.getState();
   }
 
@@ -18,9 +17,11 @@ class Todolist extends Component {
     return (
       <div style={{ margin: "10px" }}>
         <div>
-          <Input value={this.state.inputValue}
+          <Input
+            value={this.state.inputValue}
             placeholder="todo sth"
             style={{ width: "300px", marginRight: "10px" }}
+            onChange={(e) => this.handleInputChange(e)}
           />
           <Button type="primary">提交</Button>
         </div>
@@ -31,6 +32,15 @@ class Todolist extends Component {
         />
       </div>
     );
+  }
+  handleInputChange(e) {
+    // 创建action
+    const action = {
+      type: 'change_input_value',
+      value: e.target.value
+    }
+    store.dispatch(action)
+    console.log(e.target.value);
   }
 }
 export default Todolist;
