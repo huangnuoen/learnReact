@@ -40,7 +40,7 @@
   "files.autoSaveDelay": 1200,
   "files.associations": {
     "*.jsx": "javascriptreact",
-    "*.js": "javascriptreact"
+    "*.js": "javascript"
   },
   "[javascriptreact]": {}
 }
