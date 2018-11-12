@@ -6,10 +6,10 @@ import {
   getInputChangeAction,
   getAddItemAction,
   getDeleteItemAction,
-  getTodoList
+  getTodoList,initListAction
 } from "./store/actionCreators";
 import TodoListUI from "./TodoListUI";
-// import axios from "axios";
+import axios from "axios";
 // import TodoItem from "./todoitem";
 // import "./style.css";
 
@@ -35,14 +35,14 @@ class Todolist extends Component {
     // <div onClick={()=>{this.handleItem(2,22)}}>123</div>
   }
   componentDidMount() {
-    // axios.get("api/list").then(res => {
-    //   const action = initListAction(res.data);
-    //   store.dispatch(action)
-    // });
+    axios.get("api/list").then(res => {
+      const action = initListAction(res.data);
+      store.dispatch(action)
+    });
     // 函数
-    const action = getTodoList();
+    // const action = getTodoList();
     // 会自动执行action
-    store.dispatch(action);
+    // store.dispatch(action);
   }
   // 处理store变化
   handleStoreChange() {
