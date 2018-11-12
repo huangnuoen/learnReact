@@ -5,18 +5,19 @@ import store from "./store";
 import {
   getInputChangeAction,
   getAddItemAction,
-  getDeleteItemAction
+  getDeleteItemAction,
+  getTodoList
 } from "./store/actionCreators";
-import TodoListUI from "./todolistUI";
+import TodoListUI from "./TodoListUI";
+// import axios from "axios";
 // import TodoItem from "./todoitem";
 // import "./style.css";
-// import axios from "axios";
 
 class Todolist extends Component {
   constructor(props) {
     super(props);
     this.state = store.getState();
-    this.handleItem=this.handleItem.bind(this)
+    this.handleItemDelete = this.handleItemDelete.bind(this);
     // 订阅store变化信息
     store.subscribe(this.handleStoreChange.bind(this));
   }
@@ -28,17 +29,26 @@ class Todolist extends Component {
         list={this.state.list}
         handleInputChange={this.handleInputChange}
         handleBtnClick={this.handleBtnClick}
-        handleItem={this.handleItem}
+        handleItemDelete={this.handleItemDelete}
       />
-      // <div onClick={()=>{this.handleItem(2,22)}}>123</div>
     );
+    // <div onClick={()=>{this.handleItem(2,22)}}>123</div>
+  }
+  componentDidMount() {
+    // axios.get("api/list").then(res => {
+    //   const action = initListAction(res.data);
+    //   store.dispatch(action)
+    // });
+    // 函数
+    const action = getTodoList();
+    // 会自动执行action
+    store.dispatch(action);
   }
   // 处理store变化
   handleStoreChange() {
     this.setState(store.getState());
   }
-  handleItem(e,index) {
-    console.log(index);
+  handleItemDelete(index) {
     const action = getDeleteItemAction(index);
     store.dispatch(action);
   }
