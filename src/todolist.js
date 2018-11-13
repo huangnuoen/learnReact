@@ -1,25 +1,23 @@
-// Fragment 占位
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "antd/dist/antd.css";
 import store from "./store";
 import {
+  getInitList,
   getInputChangeAction,
   getAddItemAction,
-  getDeleteItemAction,
-  getTodoList,initListAction
+  getDeleteItemAction
 } from "./store/actionCreators";
 import TodoListUI from "./TodoListUI";
-import axios from "axios";
-// import TodoItem from "./todoitem";
-// import "./style.css";
 
-class Todolist extends Component {
+class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = store.getState();
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleStoreChange = this.handleStoreChange.bind(this);
+    this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleItemDelete = this.handleItemDelete.bind(this);
-    // 订阅store变化信息
-    store.subscribe(this.handleStoreChange.bind(this));
+    store.subscribe(this.handleStoreChange);
   }
 
   render() {
@@ -32,34 +30,31 @@ class Todolist extends Component {
         handleItemDelete={this.handleItemDelete}
       />
     );
-    // <div onClick={()=>{this.handleItem(2,22)}}>123</div>
   }
+
   componentDidMount() {
-    axios.get("api/list").then(res => {
-      const action = initListAction(res.data);
-      store.dispatch(action)
-    });
-    // 函数
-    // const action = getTodoList();
-    // 会自动执行action
-    // store.dispatch(action);
-  }
-  // 处理store变化
-  handleStoreChange() {
-    this.setState(store.getState());
-  }
-  handleItemDelete(index) {
-    const action = getDeleteItemAction(index);
+    const action = getInitList();
     store.dispatch(action);
   }
+
   handleInputChange(e) {
-    // 创建action
     const action = getInputChangeAction(e.target.value);
     store.dispatch(action);
   }
+
+  handleStoreChange() {
+    this.setState(store.getState());
+  }
+
   handleBtnClick() {
     const action = getAddItemAction();
     store.dispatch(action);
   }
+
+  handleItemDelete(index) {
+    const action = getDeleteItemAction(index);
+    store.dispatch(action);
+  }
 }
-export default Todolist;
+
+export default TodoList;
