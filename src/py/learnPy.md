@@ -240,7 +240,17 @@ print(trim(' hello '))
 ```
 ### 迭代 循环
 1. 类型：list,dict,字符串
-
+```
+for k in d
+for val in d.values()
+for k,v in d.items()
+for ch in 'ABC'
+```
+2. `from collections import Iterable` 通过collections模块的Iterable类型判断
+```
+from collections import Iterable
+ isinstance('abc', Iterable) # 判断str是否可迭代
+```
 
 ##
 
