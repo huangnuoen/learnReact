@@ -7,7 +7,7 @@ import {
   getAddItemAction,
   getDeleteItemAction
 } from "./store/actionCreators";
-import TodoListUI from "./TodoListUI";
+import TodoListUI from "./todolistUI";
 
 class TodoList extends Component {
   constructor(props) {
