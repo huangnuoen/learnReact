@@ -42,5 +42,6 @@
     "*.jsx": "javascriptreact",
     "*.js": "javascript"
   },
-  "[javascriptreact]": {}
+  "[javascriptreact]": {},
+  "editor.detectIndentation": false
 }

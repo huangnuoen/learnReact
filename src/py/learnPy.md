@@ -251,11 +251,48 @@ for ch in 'ABC'
 from collections import Iterable
  isinstance('abc', Iterable) # 判断str是否可迭代
 ```
+3. 用迭代判断min max
+```
+def findMinAndMax(L):
+    if(len(L) == 0):
+        return (None, None)
+    min = max = L[0]
+    for k in L:
+        if k >= max:
+            max = k
+        if k <= min:
+            min = k
+    return (min, max)
 
-##
+```
 
+### 列表生成式
+```
+a = [x*x for x in range(1, 5) if x % 2 == 0]
+>>> [4,16]
+# 打印出当前目录
+import os
+a1 =[d for d in os.listdir('.')]
+print(a1)
+```
+### 生成器
+1. `generator`生成器 一边循环一边计算的机制
+```
+a = (x*x for x in range(1, 5))
+print(a)
+>>> <generator object <genexpr> at 0x1022ef630>
+# 打印generator元素
+next(a)
+# for 循环
+for n in a:
+    print(n)
+```
+2. `generator`和函数的执行流程不一样。函数是顺序执行，遇到`return`语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用`next()`的时候执行，遇到`yield`语句返回，再次执行时从上次返回的`yield`语句处继续执行。
+3. 调用`generator`时，生成一个`generator`对象，然后用next()不断获得下一个值返回值
+4. 用`for循环`调用`generator`时，发现拿不到`generator`的return语句的返回值。如果想要拿到返回值，必须捕获`StopIteration`错误，返回值包含在`StopIteration`的value中
 
-##
-
+## 第三方模块
+`pip install Pillow`
+1. 安装常用模块 Anaconda
 
 #
