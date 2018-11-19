@@ -209,12 +209,40 @@ def count():
 
 def createCounter():
     ans = [0]
+
     # n = ans[0]
     def counter():
         ans[0] += 1
         return ans[0]
+
     return counter
 
 
 a = createCounter()
 print(createCounter()(), createCounter()(), a())
+
+
+def log(func):
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+
+    return wrapper
+
+
+@log
+def now():
+    print('16:48')
+
+
+now()
+
+
+def metric(fn):
+    print('%s executed in %s ms' % (fn.__name__, 10.24))
+    return fn
+@metric
+def fast(x,y):
+    # time.sleep(0.0012)
+    return x+y
+f = fast(11,22)

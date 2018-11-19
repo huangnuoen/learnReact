@@ -312,9 +312,33 @@ for n in a:
 2. 每次调用都返回`新的函数`
 
 ### 匿名函数
+1. `lambda:x`
+2. 匿名函数只能有一个表达式，不用`return`
+
+### 装饰器
+1. 在函数调用前后自动打印日志，但又不希望修改函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（`Decorator`）。
+```
+def log(func):
+    def wrapper(*args,**kw):
+        print('call %s():' % func.__name__)
+        return func(*args,**kw)
+    return wrapper
+# 打印日志
+@log
+def now():
+    print('16:48')
+now()
+```
+`log`是decorator,接受一个函数作参数，返回一个函数
 
 
-## 第三方模块
+## 模块
+
+### 引入
+1. `import sys`
+2. 作用域
+
+### 第三方模块
 `pip install Pillow`
 1. 安装常用模块 Anaconda
 
