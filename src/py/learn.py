@@ -246,3 +246,5 @@ def fast(x,y):
     # time.sleep(0.0012)
     return x+y
 f = fast(11,22)
+
+class Student(object)
