@@ -291,6 +291,11 @@ for n in a:
 3. 调用`generator`时，生成一个`generator`对象，然后用next()不断获得下一个值返回值
 4. 用`for循环`调用`generator`时，发现拿不到`generator`的return语句的返回值。如果想要拿到返回值，必须捕获`StopIteration`错误，返回值包含在`StopIteration`的value中
 
+### 迭代器
+1. `Iterable` 可迭代对象：
+  1.1 集合数据：`list`,`tuple`, `dict`, `set`, `str`
+  2.2 `generator`
+2. `isInstance()` 判断
 ## 第三方模块
 `pip install Pillow`
 1. 安装常用模块 Anaconda

@@ -145,10 +145,26 @@ next(odd())
 
 
 def triangles():
-    n = 1
-    while n <=6:
-        n = n+1
-        yield [x // x for x in range(1,n)]
+    # n = 1
+    L = [0, 1, 0]
+    yield [1]
+    # while n <= 6:
+        # L = [x // x for x in range(1, n)]
+        # n = n+1
+        # L=[]
+        # L = list(range(1,n))
+
+        # for x in range(1, n-1):
+        # L.append(x)
+        # L[x]=L[x]
+        # L[x]=L[x-1]+L[x]
+    while 1:
+      L = [L[x] for x in range(1, n)]
+      yield L
+      L = [0]+L+[0]
+
     return
+
+
 for n in triangles():
-  print(n)
+    print(n)
