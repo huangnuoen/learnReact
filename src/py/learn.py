@@ -2,7 +2,7 @@ def calc(*num):
     # print(num)
     sum = 0
     for n in num:
-        sum = sum+n*n
+        sum = sum + n * n
 
     return sum
 
@@ -42,7 +42,6 @@ a = product2(1, 2, 3)
 print('第二种：', a)
 print('递归')
 
-
 print('尾调用')
 
 
@@ -54,10 +53,11 @@ def fact_iter(num, product):
     if num == 1:
         return product
     print('fact_iter(', num, '-1,', num, '*', product, ')')
-    return fact_iter(num-1, num*product)
+    return fact_iter(num - 1, num * product)
 
 
 print(fact(2))
+
 
 # 把最上面(n-1) 个盘子从a， 经过c 移动到b,
 # 把1个盘子，从a 直接移动到 c,
@@ -69,20 +69,20 @@ def move(n, a, b, c):
     if n == 1:
         print('move', a, '-->', c)
     else:
-        move(n-1, a, c, b)
+        move(n - 1, a, c, b)
         move(1, a, b, c)
-        move(n-1, b, a, c)
+        move(n - 1, b, a, c)
 
 
 move(3, 'A', 'B', 'C')
 
 
 def trim(s):
-    if(s == ''):
+    if (s == ''):
         return ''
-    if(s[0] == ' '):
+    if (s[0] == ' '):
         return trim(s[1:])
-    if(s[-1] == ' '):
+    if (s[-1] == ' '):
         return trim(s[:-1])
     return s
 
@@ -91,7 +91,7 @@ print(trim(' hello '))
 
 
 def findMinAndMax(L):
-    if(len(L) == 0):
+    if (len(L) == 0):
         return (None, None)
     min = max = L[0]
     for k in L:
@@ -112,8 +112,8 @@ def fib(max):
     n, a, b = 0, 0, 1
     while n < max:
         yield b
-        a, b = b, a+b
-        n = n+1
+        a, b = b, a + b
+        n = n + 1
     return 'done'
 
 
@@ -144,27 +144,77 @@ next(odd())
 # triangles()
 
 
-def triangles():
-    # n = 1
-    L = [0, 1, 0]
-    yield [1]
-    # while n <= 6:
-        # L = [x // x for x in range(1, n)]
-        # n = n+1
-        # L=[]
-        # L = list(range(1,n))
+# def triangles():
+#     # n = 1
+#     L = [0, 1, 0]
+#     yield [1]
+#     # while n <= 6:
+#         # L = [x // x for x in range(1, n)]
+#         # n = n+1
+#         # L=[]
+#         # L = list(range(1,n))
 
-        # for x in range(1, n-1):
-        # L.append(x)
-        # L[x]=L[x]
-        # L[x]=L[x-1]+L[x]
-    while 1:
-      L = [L[x] for x in range(1, n)]
-      yield L
-      L = [0]+L+[0]
+#         # for x in range(1, n-1):
+#         # L.append(x)
+#         # L[x]=L[x]
+#         # L[x]=L[x-1]+L[x]
+#     while 1:
+#       L = [L[x] for x in range(1, n)]
+#       yield L
+#       L = [0]+L+[0]
 
-    return
+#     return
 
 
-for n in triangles():
-    print(n)
+# for n in triangles():
+#     print(n)
+L = list(range(1, 9))
+
+
+def f(x):
+    return x % 2 == 1
+
+
+r = filter(f, L)
+print(list(r))
+
+a = sorted(['Bob', 'Za', 'cdd'], key=str.lower)
+print(a)
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+
+
+def by_name(t):
+    name, score = t
+    print(str.lower(name))
+    return (str.lower(name), score)
+
+
+# sorted(L,key=by_name)
+print(sorted(L, key=by_name))
+
+
+def count():
+    fs = []
+
+    def f(j):
+        def g():
+            return j * j
+
+        return g
+
+    for i in range(1, 4):
+        fs.append(f(i))
+    return fs
+
+
+def createCounter():
+    ans = [0]
+    # n = ans[0]
+    def counter():
+        ans[0] += 1
+        return ans[0]
+    return counter
+
+
+a = createCounter()
+print(createCounter()(), createCounter()(), a())

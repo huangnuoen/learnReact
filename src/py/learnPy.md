@@ -293,9 +293,27 @@ for n in a:
 
 ### 迭代器
 1. `Iterable` 可迭代对象：
+
   1.1 集合数据：`list`,`tuple`, `dict`, `set`, `str`
+
   2.2 `generator`
 2. `isInstance()` 判断
+3. 可以被`next()`函数调用并不断返回下一个值的对象称为迭代器:`interator`
+4. `interator`  是惰性序列，可以通过next(),list()计算
+## 函数式编程`Functional Programming`
+### 高阶函数`Higher-order function`
+1. map(f, interable)
+2. reduce() 把一个函数作用在一个序列[x1, x2, x3, ...]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算,例如对序列求和
+3. `filter()`把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素。
+4. `sort(interable[,key=function,reverse=Bool])`
+
+### 闭包
+1. 内部函数可以引用外部函数的参数和局部变量，当返回函数时，相关参数和变量都保存在返回的函数中，这种称为`闭包（Closure）`
+2. 每次调用都返回`新的函数`
+
+### 匿名函数
+
+
 ## 第三方模块
 `pip install Pillow`
 1. 安装常用模块 Anaconda
