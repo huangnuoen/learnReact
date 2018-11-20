@@ -343,10 +343,96 @@ now()
 1. 安装常用模块 Anaconda
 
 ## 面对对象 Object Oriented Programming
+## 类
 1. 所有数据类型都可以视为对象，也可以自定义对象。自定义对象数据类型就是类`class`
-2. 
+2. `__init__` 方法第一个参数是`self`,   `self`指向实例本身
+3. 属性前加`__`表私有属性
+4. 以双下划线开头，并且以双下划线结尾的表特殊变量
+```
+# 声明类
+class Student(object):
+    def __init__(self, name, score):
+        self.__name = name
+        self.__score = score
+
+    def print_score(self):
+        print('%s考了 %s 分' % (self.__name, self.__score))
+
+    def get_grade(self):
+        if self.__score >= 90:
+            return 'A'
+        elif self.__score >= 60:
+            return 'B'
+        else:
+            return 'C'
+# 实例
+bart = Student('Bart', 90)
+# bart.print_score()
+print(bart.get_grade())
+```
+### 继承 多态
+1. 子类`subclass`继承父类`base class`所有功能
+2. 对于一个变量，我们只需要知道它是Animal类型，无需确切地知道它的子类型，就可以放心地调用run()方法，
+而具体调用的run()方法是作用在Animal、Dog、Cat还是Tortoise对象上，
+由运行时该对象的确切类型决定，
+这就是多态真正的威力：调用方只管调用，不管细节，
+而当我们新增一种Animal的子类时，只要确保run()方法编写正确，
+不用管原来的代码是如何调用的。
+这就是著名的“开闭”原则：
+对扩展开放：允许新增Animal子类；
+对修改封闭：不需要修改依赖Animal类型的run_twice()等函数。
+3. `type(..)、isinstance(instance, proto)` 判断类型
+4. `dir()` 获得一个对象的所有属性和方法,配合`getattr()`、`setattr()`以及`hasattr()`可以直接操作一个对象的状态
+### 实例属性和类属性
+1. 类本身需要绑定一个属性可以直接在class中定义属性，这种属性是类属性，归类所有
+```
+class Student(object):
+    name = 'Student'
 ```
 
+### __slots__
+Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性
+```
+class Student(object):
+    __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+```
+__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的
+
+注：
+1. 可以给实例单独绑定属性和方法,给一个实例绑定的方法，对另一个实例是不起作用的
+2. 为了给所有实例都绑定方法，可以给class绑定方法
+```
+>>> def set_age(self, age): # 定义一个函数作为实例方法
+...     self.age = age
+...
+>>> from types import MethodType
+>>> s.set_age = MethodType(set_age, s) # 给实例绑定一个方法
+>>> s.set_age(25) # 调用实例方法
+>>> s.age # 测试结果
 ```
 
-#
+### @property
+1. 可以把方法变成属性
+2. 可以定义只读属性，只定义getter方法，不定义setter方法就是一个只读属性
+3. 广泛应用在类的定义中，可以让调用者写出简短的代码，同时保证对参数进行必要的检查
+```
+class Student(object):
+
+    @property
+    def birth(self):
+        return self._birth
+
+    @birth.setter
+    def birth(self, value):
+        self._birth = value
+
+    @property
+    def age(self):
+        return 2015 - self._birth
+        
+    # 将birth变成可读写属性，age变成只读属性
+```
+### 多重继承 MixIn 
+1. MixIn的目的就是给一个类增加多个功能
+
+### 
