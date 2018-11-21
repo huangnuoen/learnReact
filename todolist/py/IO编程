@@ -1,0 +1,51 @@
+## IO编程
+- IO指Input/Output
+### os 模块
+```
+import os
+os.name
+```
+1. 环境变量`os.environ`
+2. 操作文件和目录
+    一部分放在`os`模块中，一部分放在`os.path`模块中
+    
+## 常用模块
+### datetime
+1. `from datetime import datetime`
+2. `now = datetime.now()``datetime(2016,4,2,12,22)` 获取指定时间
+3. `dt.timestamp()` datetime->时间戳
+4. `datetime.fromtimestamp(t)` 时间戳-》datetime
+5. `datetime.strptime('2016-7-1','%Y%m%d')` 
+6. ``datetime->str
+...
+
+### collections
+` from collections import namedtuple`
+1. namedtuple 
+    - 它用来创建一个自定义的tuple对象，并且规定了tuple元素的个数，并可以用**属性**而不是索引来引用tuple的某个元素。
+2. deque
+    - 高效实现插入和删除操作的双向列表，适合用于队列和栈
+    ```
+    >>> q = deque(['a', 'b', 'c'])
+    >>> q.append('x')
+    >>> q.appendleft('y')
+    ```
+3. defaultdict
+    - 希望key不存在时，返回一个默认值，就可以用defaultdict
+4. 如果要保持Key的顺序，可以用OrderedDict
+    - OrderedDict的Key会按照插入的顺序排列，不是Key本身排序
+    
+### Base64
+- Python内置的base64可以直接进行base64的编解码：
+```
+import base64
+base64.b64encode(b'binary\x00string')
+base64.b64decode(b'YmluYXJ5AHN0cmluZw==')
+
+```
+- 由于标准的Base64编码后可能出现字符+和/，在URL中就不能直接作为参数，所以又有一种"url safe"的base64编码，其实就是把字符+和/分别变成-和_：
+```
+base64.urlsafe_b64encode(b'i\xb7\x1d\xfb\xef\xff')
+>>> b'abcd--__'
+```
+    
