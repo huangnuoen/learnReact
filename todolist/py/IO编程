@@ -9,7 +9,7 @@ os.name
 2. 操作文件和目录
     一部分放在`os`模块中，一部分放在`os.path`模块中
     
-## 常用模块
+## 常用内置模块
 ### datetime
 1. `from datetime import datetime`
 2. `now = datetime.now()``datetime(2016,4,2,12,22)` 获取指定时间
@@ -49,3 +49,17 @@ base64.urlsafe_b64encode(b'i\xb7\x1d\xfb\xef\xff')
 >>> b'abcd--__'
 ```
     
+### HTMLParser
+```
+from html.parser import HTMLParser
+from html.entities import name2codepoint
+```
+- 利用HTMLParser，可以把网页中的文本、图像等解析出来。
+## 第三方模块
+### Pillow
+### requests
+```
+import requests
+r = requests.get('https://www.douban.com/')
+print(r.status_code,r.url,r.text)
+```

@@ -255,6 +255,32 @@ class Dict(dict):
 # f = open('C:/Users/14922/Desktop/test.txt', 'w')
 # f.write('hi')
 
-from datetime import datetime
-dt=datetime(2016,4,2,12,22)
-print(dt)
+# from datetime import datetime
+# dt=datetime(2016,4,2,12,22)
+# print(dt)
+
+# import requests
+#
+# r = requests.get('https://www.douban.com/',params={'cat':'1001'})
+# print(r.url)
+
+from tkinter import *
+
+
+class Application(Frame):
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
+        self.pack()
+        self.createWidgets()
+
+    def createWidgets(self):
+        self.helloLabel = Label(self, text='Hello, world!')
+        self.helloLabel.pack()
+        self.quitButton = Button(self, text='Quit', command=self.quit)
+        self.quitButton.pack()
+
+app = Application()
+# 设置窗口标题:
+app.master.title('Hello World')
+# 主消息循环:
+app.mainloop()
