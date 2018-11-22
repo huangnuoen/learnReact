@@ -238,18 +238,18 @@
 # now()
 #
 #
-class Dict(dict):
-    def __init__(self, **kw):
-        super().__init__(**kw)
-
-    def __getattr__(self, key):
-        try:
-            return self[key]
-        except KeyError:
-            raise AttributeError(r"'Dict' object has no attribute '%s'" % key)
-
-    def __setattr__(self, key, value):
-        self[key] = value
+# class Dict(dict):
+#     def __init__(self, **kw):
+#         super().__init__(**kw)
+#
+#     def __getattr__(self, key):
+#         try:
+#             return self[key]
+#         except KeyError:
+#             raise AttributeError(r"'Dict' object has no attribute '%s'" % key)
+#
+#     def __setattr__(self, key, value):
+#         self[key] = value
 
 
 # f = open('C:/Users/14922/Desktop/test.txt', 'w')
@@ -267,26 +267,28 @@ class Dict(dict):
 from tkinter import *
 import tkinter.messagebox as messagebox
 
+# class Application(Frame):
+#     def __init__(self, master=None):
+#         Frame.__init__(self, master)
+#         self.pack()
+#         self.createWidgets()
+#
+#     def createWidgets(self):
+#         self.nameInput = Entry(self)
+#         self.nameInput.pack()
+#         self.alertButton = Button(self, text='hello', command=self.hello)
+#         self.alertButton.pack()
+#
+#     def hello(self):
+#         name = self.nameInput.get() or 'world'
+#         messagebox.showinfo('Message', 'hello %s' % name)
+#
+#
+# app = Application()
+# # 设置窗口标题:
+# app.master.title('Hello World')
+# # 主消息循环:
+# app.mainloop()
 
-class Application(Frame):
-    def __init__(self, master=None):
-        Frame.__init__(self, master)
-        self.pack()
-        self.createWidgets()
-
-    def createWidgets(self):
-        self.nameInput = Entry(self)
-        self.nameInput.pack()
-        self.alertButton = Button(self, text='hello', command=self.hello)
-        self.alertButton.pack()
-
-    def hello(self):
-        name = self.nameInput.get() or 'world'
-        messagebox.showinfo('Message', 'hello %s' % name)
 
 
-app = Application()
-# 设置窗口标题:
-app.master.title('Hello World')
-# 主消息循环:
-app.mainloop()
