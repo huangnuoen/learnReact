@@ -265,6 +265,7 @@ class Dict(dict):
 # print(r.url)
 
 from tkinter import *
+import tkinter.messagebox as messagebox
 
 
 class Application(Frame):
@@ -274,10 +275,15 @@ class Application(Frame):
         self.createWidgets()
 
     def createWidgets(self):
-        self.helloLabel = Label(self, text='Hello, world!')
-        self.helloLabel.pack()
-        self.quitButton = Button(self, text='Quit', command=self.quit)
-        self.quitButton.pack()
+        self.nameInput = Entry(self)
+        self.nameInput.pack()
+        self.alertButton = Button(self, text='hello', command=self.hello)
+        self.alertButton.pack()
+
+    def hello(self):
+        name = self.nameInput.get() or 'world'
+        messagebox.showinfo('Message', 'hello %s' % name)
+
 
 app = Application()
 # 设置窗口标题:
