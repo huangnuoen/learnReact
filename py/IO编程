@@ -1,0 +1,80 @@
+## IO编程
+- IO指Input/Output
+### os 模块
+```
+import os
+os.name
+```
+1. 环境变量`os.environ`
+2. 操作文件和目录
+    一部分放在`os`模块中，一部分放在`os.path`模块中
+    
+## 常用内置模块
+### datetime
+1. `from datetime import datetime`
+2. `now = datetime.now()``datetime(2016,4,2,12,22)` 获取指定时间
+3. `dt.timestamp()` datetime->时间戳
+4. `datetime.fromtimestamp(t)` 时间戳-》datetime
+5. `datetime.strptime('2016-7-1','%Y%m%d')` 
+6. ``datetime->str
+...
+
+### collections
+` from collections import namedtuple`
+1. namedtuple 
+    - 它用来创建一个自定义的tuple对象，并且规定了tuple元素的个数，并可以用**属性**而不是索引来引用tuple的某个元素。
+2. deque
+    - 高效实现插入和删除操作的双向列表，适合用于队列和栈
+    ```
+    >>> q = deque(['a', 'b', 'c'])
+    >>> q.append('x')
+    >>> q.appendleft('y')
+    ```
+3. defaultdict
+    - 希望key不存在时，返回一个默认值，就可以用defaultdict
+4. 如果要保持Key的顺序，可以用OrderedDict
+    - OrderedDict的Key会按照插入的顺序排列，不是Key本身排序
+    
+### Base64
+- Python内置的base64可以直接进行base64的编解码：
+```
+import base64
+base64.b64encode(b'binary\x00string')
+base64.b64decode(b'YmluYXJ5AHN0cmluZw==')
+
+```
+- 由于标准的Base64编码后可能出现字符+和/，在URL中就不能直接作为参数，所以又有一种"url safe"的base64编码，其实就是把字符+和/分别变成-和_：
+```
+base64.urlsafe_b64encode(b'i\xb7\x1d\xfb\xef\xff')
+>>> b'abcd--__'
+```
+    
+### HTMLParser
+```
+from html.parser import HTMLParser
+from html.entities import name2codepoint
+```
+- 利用HTMLParser，可以把网页中的文本、图像等解析出来。
+## 第三方模块
+### Pillow
+### requests
+```
+import requests
+r = requests.get('https://www.douban.com/')
+print(r.status_code,r.url,r.text)
+```
+### asyncio
+1. `asyncio`的编程模型就是一个消息循环。
+- 我们从`asyncio`模块中直接获取一个`EventLoop`的引用，然后把需要执行的协程扔到`EventLoop`中执行，就实现了异步IO。
+2. 多个coroutine可以封装成一组Task然后并发执行。
+3. 可以实现单线程并发IO操作
+4. 把`asyncio`用在服务器端，例如Web服务器，由于`HTTP连接`就是IO操作，因此可以用单线程+`coroutine`实现多用户的高并发支持。
+
+### aiohttp
+1. 基于asyncio实现的HTTP框架。
+2. 一旦决定使用异步，则系统每一层都必须是异步
+
+## MySQL 
+1. 我们需要创建一个全局的连接池，每个HTTP请求都可以从连接池中直接获取数据库连接。使用连接池的好处是不必频繁地打开和关闭数据库连接，而是能复用就尽量复用。
+2. 连接池由全局变量__pool存储，缺省情况下将编码设置为utf8，自动提交事务：
+
