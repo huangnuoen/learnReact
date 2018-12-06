@@ -248,6 +248,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/jianshu/node_modules" />
     <handled-path value="$PROJECT_DIR$/todolist/node_modules" />
   </component>
   <component name="NodePackageJsonFileManager">
@@ -256,7 +257,7 @@
       <path value="$PROJECT_DIR$/todolist/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="398" />
     <option name="width" value="1426" />
     <option name="height" value="1047" />
@@ -642,7 +643,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15991472" />
