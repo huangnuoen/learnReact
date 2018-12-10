@@ -53,7 +53,7 @@ class Header extends Component {
             <i className={this.props.focused ? "focused iconfont" : "iconfont"}>
               &#xe678;
             </i>
-            {this.getListArea(this.props.focused)}
+            {this.getListArea()}
           </SearchWrapper>
         </Nav>
         <Addition>
@@ -66,19 +66,42 @@ class Header extends Component {
     );
   }
 
-  getListArea(show) {
-    if (show) {
+  getListArea() {
+    const { focused, list, page, mouseIn, totalPage } = this.props;
+    const newList = list.toJS();
+    const pageList = [];
+    // if(!newList.length) return;
+    if (newList.length) {
+      for (let i = (page - 1) * 10; i < page * 10; i++) {
+        if (newList[i]) {
+          pageList.push(
+            <SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+          );
+        }
+      }
+    }
+
+    if (focused || mouseIn) {
       return (
-        <SearchInfo>
+        <SearchInfo
+          onMouseEnter={() => {
+            this.props.handleMouseIn();
+          }}
+          onMouseLeave={() => {
+            this.props.handleMouseLeave();
+          }}
+        >
           <SearchInfoTitle>
             热门搜索
-            <SearchInfoSwitch>换一换</SearchInfoSwitch>
+            <SearchInfoSwitch
+              onClick={() => {
+                this.props.handleChangePage(page, totalPage);
+              }}
+            >
+              换一换
+            </SearchInfoSwitch>
           </SearchInfoTitle>
-          <SearchInfoList>
-            <SearchInfoItem>教育</SearchInfoItem>
-            <SearchInfoItem>教育</SearchInfoItem>
-            <SearchInfoItem>教育</SearchInfoItem>
-          </SearchInfoList>
+          <SearchInfoList>{pageList}</SearchInfoList>
         </SearchInfo>
       );
     } else {
@@ -90,18 +113,35 @@ class Header extends Component {
 // 把state映射到props上，state即是store
 const mapStateToProps = state => {
   return {
-    focused: state.get("header").get("focused")
+    focused: state.get("header").get("focused"),
+    mouseIn: state.get("header").get("mouseIn"),
+    list: state.getIn(["header", "list"]),
+    page: state.getIn(["header", "page"]),
+    totalPage: state.getIn(["header", "totalPage"])
   };
 };
 // 映射方法到props上，方法可以调用store的dispatch
 const mapdispatchToProps = dispatch => {
   return {
     handleInputFocus() {
-      dispatch(actionCreators.getList())
+      dispatch(actionCreators.getList());
       dispatch(actionCreators.searchFocus());
     },
     handleInputBlur() {
       dispatch(actionCreators.searchBlur());
+    },
+    handleMouseIn() {
+      dispatch(actionCreators.mouseEnter());
+    },
+    handleMouseLeave() {
+      dispatch(actionCreators.mouseLeave());
+    },
+    handleChangePage(page, totalPage) {
+      if (page < totalPage) {
+        dispatch(actionCreators.changePage(page + 1));
+      } else {
+        dispatch(actionCreators.changePage(1));
+      }
     }
   };
 };
