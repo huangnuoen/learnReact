@@ -53,7 +53,7 @@ const Header = props => {
 // 把state映射到props上，state即是store
 const mapStateToProps = state => {
   return {
-    focused: state.header.focused
+    focused: state.get('header').get('focused')
   };
 };
 // 映射方法到props上，方法可以调用store的dispatch

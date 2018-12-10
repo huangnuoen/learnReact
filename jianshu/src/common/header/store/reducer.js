@@ -1,21 +1,18 @@
 import * as constants from './constants'
-
+import {
+  fromJS
+} from 'immutable'
 // state.header
-const defaultState = {
+const defaultState = fromJS({
   focused: false
-}
+})
 // reducer必须是一个纯函数 
-export default (state = defaultState,action) => {
+export default (state = defaultState, action) => {
   if (action.type === constants.SEARCH_FOCUS) {
-    return {
-      focused: true
-    }
+    return state.set('focused',true)
   }
   if (action.type === constants.SEARCH_BLUR) {
-    return {
-      focused: false
-    }
+    return state.set('focused', false)
   }
   return state;
 }
-

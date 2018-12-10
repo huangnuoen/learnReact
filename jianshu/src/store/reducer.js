@@ -1,7 +1,6 @@
-
 import {
   combineReducers
-} from 'redux'
+} from 'redux-immutable'
 import {
   reducer as headerReducer
 } from '../common/header/store'
@@ -11,5 +10,3 @@ export const reducer = combineReducers({
 })
 
 export default reducer;
-
-
