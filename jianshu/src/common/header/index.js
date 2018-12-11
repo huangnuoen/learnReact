@@ -42,7 +42,7 @@ class Header extends Component {
             >
               <NavSearch
                 onFocus={() => {
-                  this.props.handleInputFocus();
+                  this.props.handleInputFocus(this.props.list);
                 }}
                 onBlur={() => {
                   this.props.handleInputBlur();
@@ -135,8 +135,9 @@ const mapStateToProps = state => {
 // 映射方法到props上，方法可以调用store的dispatch
 const mapdispatchToProps = dispatch => {
   return {
-    handleInputFocus() {
-      dispatch(actionCreators.getList());
+    handleInputFocus(list) {
+      
+      list.size === 0 && dispatch(actionCreators.getList());
       dispatch(actionCreators.searchFocus());
     },
     handleInputBlur() {
@@ -156,7 +157,7 @@ const mapdispatchToProps = dispatch => {
       } else {
         originAngle = 0;
       }
-      spin.style.transform = `rotate(${originAngle+360}deg)`;
+      spin.style.transform = `rotate(${originAngle + 360}deg)`;
       if (page < totalPage) {
         dispatch(actionCreators.changePage(page + 1));
       } else {
