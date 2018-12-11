@@ -33,8 +33,4 @@ export default connect(
   null
 )(Topic);
 
-// const mapState = (state) => ({
-// 	list: state.get('home').get('topicList')
-// });
 
-// export default connect(mapState, null)(Topic);
