@@ -4,9 +4,13 @@ import {
 import {
   reducer as headerReducer
 } from '../common/header/store'
+import {
+  reducer as homeReducer
+} from '../pages/home/store'
 // 合并reducers
 export const reducer = combineReducers({
-  header: headerReducer
+  header: headerReducer,
+  home: homeReducer
 })
 
 export default reducer;
