@@ -17,6 +17,8 @@ import {
 } from "./style";
 import { CSSTransition } from "react-transition-group";
 import { actionCreators } from "./store";
+import { Link } from "react-router-dom";
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,9 @@ class Header extends Component {
     return (
       <HeaderWrapper>
         {" "}
-        <Logo href="/"> </Logo>
+        <Link to="/">
+          <Logo />
+        </Link>
         <Nav>
           <NavItem className="left">首页</NavItem>
           <NavItem className="left">下载APP</NavItem>
@@ -136,7 +140,6 @@ const mapStateToProps = state => {
 const mapdispatchToProps = dispatch => {
   return {
     handleInputFocus(list) {
-      
       list.size === 0 && dispatch(actionCreators.getList());
       dispatch(actionCreators.searchFocus());
     },

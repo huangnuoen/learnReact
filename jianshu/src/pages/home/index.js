@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+// purecomponent 只适用immutable.js
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { HomeWrapper, HomeLeft, HomeRight, BackTop } from "./style";
 import Topic from "./components/Topic";
@@ -6,7 +7,9 @@ import List from "./components/List";
 import Recommend from "./components/Recommend";
 import Writer from "./components/Writer";
 import { actionCreators } from "./store";
-class Home extends Component {
+class Home extends PureComponent {
+
+
   handleScrollTop() {
     window.scrollTo(0, 0);
   }
@@ -44,6 +47,10 @@ class Home extends Component {
   componentDidMount() {
     this.props.changeHomeData();
     this.bindEvents();
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('scroll',this.props.changeScrollTopShow)
   }
 }
 const mapState = state => ({

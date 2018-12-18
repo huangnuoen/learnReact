@@ -15,15 +15,13 @@ class App extends Component {
         <Globalstyle />
         {/* provider把store提供给内部组件 */}
         <Provider store={store}>
-          <div>
-            <Header />
-            <BrowserRouter>
-              <div>
-                <Route path="/" exact component={Home} />
-                <Route path="/detail" exact component={Detail} />
-              </div>
-            </BrowserRouter>
-          </div>
+          <BrowserRouter>
+            <div>
+              <Header />
+              <Route path="/" exact component={Home} />
+              <Route path="/detail" exact component={Detail} />
+            </div>
+          </BrowserRouter>
         </Provider>
       </div>
     );
